@@ -26,7 +26,7 @@ app.use(express.static("public"))
 //Routes and Routers
     app.get("/", (req, res) => {
 
-        res.send("But they were, all of them, deceived. For another ring was made.")
+        res.send("RAWR")
         
     })
 
@@ -81,7 +81,10 @@ app.use(express.static("public"))
 
 
     //New
+        app.get("/animals/new", (req, res) => {
 
+            res.render("animals/new.ejs")
+        })
 
 
     //Destroy
@@ -93,14 +96,43 @@ app.use(express.static("public"))
 
 
     //Create
+        app.post("/animals", async (req, res) => {
 
+            try {
+           
+            req.body.extinct = req.body.extinct === "on" ? true : false
+            
+            await Animals.create(req.body)
+            
+            res.redirect("/animals")
+
+            } catch (error) {
+            console.log("-----", error.message, "------")
+            res.status(400).send("error, read logs for details")
+            }
+        });
 
 
     //Edit
-
+        
 
 
     //Show
+    app.get("/animals/:id", async (req, res) => {
+
+        try {
+          
+          const id = req.params.id;
+      
+          const animals = await Animals.findById(id);
+      
+          res.render("animals/show.ejs", { animals });
+
+        } catch (error) {
+          console.log("-----", error.message, "------");
+          res.status(400).send("error, read logs for details");
+        }
+      });
 
 
 

@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-  
+  <%- include("./cssjs.ejs") %>
   <body>
     <%- include("../partials/header.ejs") %>
 
     <main>
       <div>
         <article>
-          <a href="/animals/<%= animals._id %>">
-            <h2>
-             
-            </h2>
+          <a href="/animals/<%= animals %>"></a>
+
+            <% for (let i = 0; i < animals.length; ++i) { %>
+
+              <a href="/animals/<%= animals[i]._id %>">
+
+                <%= animals[i].species %>
+
+           <% } %>
+
           </a>
         </article>
 

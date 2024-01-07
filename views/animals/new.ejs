@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <body>
-    <%- include("../partials/header.ejs") %>
 
     <main>
       <div>
-        <form action="/animals" method="post">
+        <form action="/animals" method="POST">
           <fieldset>
             <legend>Add a new Animal</legend>
             <label
@@ -32,7 +31,7 @@
                 placeholder="how long does this animal live?"
             /></label>
           </fieldset>
-          <button>Submit New Animal</button>
+          <input type="submit" value="Submit Animal">
         </form>
       </div>
     </main>

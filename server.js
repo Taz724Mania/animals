@@ -11,6 +11,8 @@
 
     const Animals = require("./models/animals")
 
+
+
 //App Object
 const app = express()
 
@@ -70,6 +72,7 @@ app.use(express.static("public"))
                 const animals = await Animals.find({})
 
                 res.render("animals/index.ejs", { animals })
+                console.log(animals)
 
             } catch (error) {
 
@@ -85,7 +88,6 @@ app.use(express.static("public"))
             res.render("animals/new.ejs")
         })
 
-
     //Destroy
         app.delete("/animals/:id", async (req, res) => {
             
@@ -95,7 +97,6 @@ app.use(express.static("public"))
             
             res.redirect("/animals")
         })
-
 
     //Update
     app.put("/animals/:id", async (req, res) => {
@@ -116,7 +117,6 @@ app.use(express.static("public"))
         }
       })
 
-
     //Create
         app.post("/animals", async (req, res) => {
 
@@ -133,7 +133,6 @@ app.use(express.static("public"))
             res.status(400).send("error, read logs for details")
             }
         });
-
 
     //Edit
     app.get("/animals/:id/edit", async (req, res) => {
@@ -152,7 +151,6 @@ app.use(express.static("public"))
         }
       })
 
-
     //Show
     app.get("/animals/:id", async (req, res) => {
 
@@ -169,8 +167,6 @@ app.use(express.static("public"))
           res.status(400).send("error, read logs for details");
         }
       });
-
-
 
 //Server Listener
     const PORT = process.env.PORT || 3000

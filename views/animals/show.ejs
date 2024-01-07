@@ -9,15 +9,20 @@
 
           <h2>
             <%= animals.species %>
+          </h2>
+          <h2> 
             <%= animals.extinct ? "Extinct" : "Not Extinct" %>
+          </h2>
+          <h2>
             <%= animals.location %>
+          </h2>
+          <h2>
             <%= animals.lifeExpectancy %>
-
           </h2>
 
           
 
-          <a href="/animals/<%= aniamls._id %>/edit"><button>Edit this Animal</button></a>
+          <a href="/animals/<%= animals._id %>/edit"><button>Edit this Animal</button></a>
 
           <form action="/animals/<%= animals._id %>?_method=DELETE" method="POST">
 

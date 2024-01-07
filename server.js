@@ -87,7 +87,14 @@ app.use(express.static("public"))
 
 
     //Destroy
-
+        app.delete("/animals/:id", async (req, res) => {
+            
+            const id = req.params.id
+            
+            await Animals.findByIdAndDelete(id)
+            
+            res.redirect("/animals")
+        })
 
 
     //Update

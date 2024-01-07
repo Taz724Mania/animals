@@ -69,7 +69,7 @@ app.use(express.static("public"))
             try {
                 const animals = await Animals.find({})
 
-                res.render("animals/index.ejs", {animals})
+                res.render("animals/index.ejs", { animals })
 
             } catch (error) {
 
@@ -78,7 +78,6 @@ app.use(express.static("public"))
                 res.status(400).send("error, read logs for details")
             }
         })
-
 
     //New
         app.get("/animals/new", (req, res) => {
@@ -92,7 +91,23 @@ app.use(express.static("public"))
 
 
     //Update
+    app.put("/animals/:id", async (req, res) => {
 
+        try {
+          
+          const id = req.params.id
+          
+          req.body.extinct = req.body.extinct === "on" ? true : false
+          
+          await Animals.findByIdAndUpdate(id, req.body)
+          
+          res.redirect(`/animals/${id}`);
+
+        } catch (error) {
+          console.log("-----", error.message, "------")
+          res.status(400).send("error, read logs for details")
+        }
+      })
 
 
     //Create
@@ -114,7 +129,21 @@ app.use(express.static("public"))
 
 
     //Edit
+    app.get("/animals/:id/edit", async (req, res) => {
+
+        try {
         
+          const id = req.params.id;
+          
+          const animals = await Animals.findById(id)
+          
+          res.render("animals/edit.ejs", { animals })
+
+        } catch (error) {
+          console.log("-----", error.message, "------")
+          res.status(400).send("error, read logs for details")
+        }
+      })
 
 
     //Show
